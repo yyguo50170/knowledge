@@ -1,6 +1,8 @@
 import java.util.Date;
-import java.util.Timer;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author GuoYangYang
@@ -13,27 +15,25 @@ public class Pool {
 //        Executors.newCachedThreadPool();
         ThreadPoolExecutor executor = new ThreadPoolExecutor(
                 1,
-                1,
+                2,
                 1L,
                 TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(3),
+                new LinkedBlockingQueue<>(3),
                 Executors.defaultThreadFactory(),
-                new ThreadPoolExecutor.DiscardOldestPolicy());
+                new ThreadPoolExecutor.CallerRunsPolicy());
 
-        try{
-            for(int i =1; i <= 9;i++){
+        try {
+            for (int i = 1; i <= 9; i++) {
                 Thread.sleep(5L);
                 int finalI = i;
-                executor.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+"执行"+ finalI+" =="+ new Date().getTime());
+                executor.execute(() -> {
+                    System.out.println(Thread.currentThread().getName() + "执行" + finalI + " ==" + new Date().getTime());
                 });
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             executor.shutdown();
         }
-
-
     }
 }
