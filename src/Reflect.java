@@ -1,6 +1,5 @@
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -42,7 +41,7 @@ class Demo extends Super{
     protected int procode = 50;
 
     public Demo(){
-        System.out.println("午餐构造");
+        System.out.println("无参数构造");
     }
 
     public Demo(int a ){
