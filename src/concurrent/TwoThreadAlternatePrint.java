@@ -6,7 +6,7 @@ public class TwoThreadAlternatePrint {
 
     public static void main(String[] args) {
         //TwoPrint p = new TwoPrint(50, 100);
-        TwoPrintUseSemaphore p = new TwoPrintUseSemaphore(1,0);
+        TwoPrintUseSemaphore p = new TwoPrintUseSemaphore(1, 0);
         Thread t1 = new Thread(p, "t1"), t2 = new Thread(p, "t2");
         t1.start();
         t2.start();
@@ -73,7 +73,7 @@ class TwoPrint implements Runnable {
  */
 class TwoPrintUseSemaphore implements Runnable {
     Semaphore s1, s2;
-    int begin = 1,end = 100;
+    int begin = 1, end = 100;
 
     public TwoPrintUseSemaphore(int s1, int s2) {
         this.s1 = new Semaphore(s1);
@@ -87,11 +87,11 @@ class TwoPrintUseSemaphore implements Runnable {
                 String name = Thread.currentThread().getName();
                 if (name.equals("t1")) {
                     s1.acquire();
-                    System.out.println(name+":"+begin++);
+                    System.out.println(name + ":" + begin++);
                     s2.release();
-                }else if(name.equals("t2")){
+                } else if (name.equals("t2")) {
                     s2.acquire();
-                    System.out.println(name+":"+begin++);
+                    System.out.println(name + ":" + begin++);
                     s1.release();
                 }
             }

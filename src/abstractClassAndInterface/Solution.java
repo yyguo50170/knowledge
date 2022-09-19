@@ -1,6 +1,6 @@
 package abstractClassAndInterface;
 
-public class Solution {
+public class Solution implements InterfaceDemo {
 
     public static void main(String[] args) {
         InterfaceImpl i = new InterfaceImpl();
@@ -14,5 +14,15 @@ public class Solution {
         };
         a.run();
         System.out.println(a.sub(5, 2));
+    }
+
+    @Override
+    public void fly() {
+        InterfaceDemo.super.fly();
+    }
+
+    @Override
+    public int sum(int a, int b) {
+        return 0;
     }
 }
